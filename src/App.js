@@ -1,7 +1,6 @@
 // import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Flipkart from "./Flipkart";
-import Razor from "./Razor/Razorheader";
 import Offers from "./Flipkart/Offers";
 import Mobile from "./Flipkart/Mobile";
 import Electronic from "./Flipkart/Electronic";
@@ -17,6 +16,7 @@ import Flipkartlogin from "./Flipkart/Flipkartlogin";
 import Notification from "./Flipkart/Notification";
 import Flipkartheader from "./Flipkart/Flipkartheader";
 import Product from "./Flipkart/Product";
+import Detail from "./Flipkart/Detail";
 function App() {
   return (
    <>
@@ -25,7 +25,6 @@ function App() {
     <Routes>
     
       <Route path="/" element={<Flipkart/>}/>
-      <Route path="/razor" element={<Razor/>}/>
       <Route path="/Offers" element={<Offers/>}/>
       <Route path="/Mobile" element={<Mobile/>}/>
       <Route path="/Electronic" element={<Electronic/>}/>
@@ -40,6 +39,7 @@ function App() {
       <Route path="/login" element={<Flipkartlogin/>}/>
       <Route path="/notification" element={<Notification/>}/>
       <Route path="/product" element={<Product/>}/>
+      <Route path="/detail/:id" element={<Detail/>}/>
     </Routes>
    </BrowserRouter>
    </>

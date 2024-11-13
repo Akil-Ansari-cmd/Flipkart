@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
+import { useNavigate } from 'react-router-dom';
 
 function PrevArrow(props) {
   const { onClick } = props;
@@ -28,8 +29,9 @@ function NextArrow(props) {
 
 
 const UseEffect2 = () => {
-  const [data, setData] = useState();
-  const [content, setContent] = useState(false);
+const [data, setData] = useState([]);
+  // const [content, setContent] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch('https://dummyjson.com/products')
@@ -107,12 +109,12 @@ const UseEffect2 = () => {
       <Slider {...settings}>
          {data &&
               data.map((items) => (
-                <div className="mb-5">
-                  <div className='border h-60 border-black mx-5 rounded-lg p-3'><img className='h-40 mx-auto w-28 ' onClick={() => setContent(!content)} src={items.images} />
+                <div key={items.id} className="mb-5">
+                  <div className='border h-60 border-black mx-5 rounded-lg p-3' onClick={() => navigate(`/detail/${items.id}`)}><img className='h-40 mx-auto w-28 '  src={items.images} />
                     <div className='text-center truncate  font-normal'>{items.title}</div>
                     <div className='text-center text-black font-semibold'>{items.price}</div>
                   </div>
-                  <div>{content ? `${items.description}` : ""}</div>
+                  {/* <div>{content ? `${items.description}` : ""}</div> */}
                 </div>
               ))
             }
