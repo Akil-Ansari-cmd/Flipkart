@@ -63,32 +63,34 @@ const Flipkartheader = () => {
             [name]: value,
         }))
     }
-    const handleSubmit = (e) =>{
+    const handleSubmit = (e) => {
         e.preventDefault();
 
-        fetch('https://dummyjson.com/auth/login',{
-            method:"POST",
-            headers:{
-                'Content-Type':'application/json'
+        fetch('https://dummyjson.com/auth/login', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
             },
-            body:JSON.stringify({
-                username:data.username,
-                password:data.password,
-                expiresInMins:30,
+            body: JSON.stringify({
+                username: data.username,
+                password: data.password,
+                expiresInMins: 30,
             })
         })
-        .then(res=>res.json())
-        .then(data=>{setData(data)
-            if(data.accessToken){
-                localStorage.setItem("token",data.accessToken)
-                toast.success("Form Submitted")
-            }else{
-                toast.error(data.message);
-            }
-        })
-        .catch((e) => {
-            console.log(e);
-        })
+            .then(res => res.json())
+            .then(data => {
+                setData(data)
+                if (data.accessToken) {
+                    localStorage.setItem("token", data.accessToken)
+                    toast.success("Form Submitted");
+                    window.location.reload();
+                } else {
+                    toast.error(data.message);
+                }
+            })
+            .catch((e) => {
+                console.log(e);
+            })
     }
 
 
@@ -116,12 +118,12 @@ const Flipkartheader = () => {
 
             <div className='flex items-center' >
                 <MdOutlineAccountCircle className='h-6 w-10 ' />
-                <span className='text-lg  ' onClick={handleOpen}>{localStorage.getItem("token")?<span className='text-base'>Logout</span>:<span className='text-base'>Login</span>}</span>
+                <span className='text-lg  ' >{localStorage.getItem("token") ? <span className='text-base' onClick={() =>{ localStorage.removeItem("token"); window.location.reload()}} >Logout</span> : <span className='text-base' onClick={handleOpen} >Login</span>}</span>
                 <Modal
                     aria-labelledby="transition-modal-title"
                     aria-describedby="transition-modal-description"
                     open={open}
-                   
+
                     closeAfterTransition
                     slots={{ backdrop: Backdrop }}
                     slotProps={{
@@ -138,7 +140,7 @@ const Flipkartheader = () => {
                     <Fade in={open}>
                         <Box className='!outline-none !rounded-xl lg:w-[65%] !absolute lg:!top-[10%] lg:!left-[18%] !top-5 md:!right-16 left-5 !right-5 md:!left-28 '>
                             <form onSubmit={handleSubmit} className='relative lg:m-auto  lg:w-full   shadow-lg rounded-xl'>
-                            <RxCross1  onClick={handleClose} className='absolute right-4 text-xl top-2'/>
+                                <RxCross1 onClick={handleClose} className='absolute right-4 text-xl top-2' />
                                 <div className='grid grid-cols-1 lg:grid-cols-2 h-[50%] lg:h-full rounded-xl'>
                                     <div className='bg-white  rounded-l-xl'>
                                         <div className='lg:ml-10 font-semibold'>
@@ -158,8 +160,9 @@ const Flipkartheader = () => {
                                         </div>
                                         <div>
                                             <div className='flex justify-between'>
-                                                <div className='flex mt-3 ml-10'>
-                                                    <CheckBoxOutlineBlankOutlinedIcon style={{ color: "lightgray" }} />
+                                                <div className='flex mt-3 ml-10 gap-3'>
+                                                    {/* <CheckBoxOutlineBlankOutlinedIcon style={{ color: "lightgray" }} /> */}
+                                                    <input type="checkbox" name="" id="" />
                                                     <div className='text-gray-500 text-sm'> Keep me signed in</div>
                                                 </div>
                                                 {/* <div className='mt-3 mr-10 text-sm text-blue-500'>

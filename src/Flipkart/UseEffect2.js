@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 function PrevArrow(props) {
   const { onClick } = props;
   return (
-    <button className="bg-white border-r border-y border-black  absolute top-[35%] rounded-r-lg pt-5  z-50 h-16 w-8 pl-2 md:flex hidden"  onClick={onClick}  >
+    <button className="bg-white border-r border-y border-black  absolute top-[35%] rounded-r-lg pt-5  z-50 h-16 w-8 pl-2 flex"  onClick={onClick}  >
     <IoIosArrowBack/>
     </button>
   );
@@ -19,7 +19,7 @@ function PrevArrow(props) {
 function NextArrow(props) {
   const {onClick } = props;
   return (
-    <button className="bg-white border-l border-y border-black z-[999] absolute top-[35%] rounded-l-lg right-0 h-16 w-8 pl-2 pt-5 md:flex hidden"  onClick={onClick}  >
+    <button className="bg-white border-l border-y border-black z-[999] absolute top-[35%] rounded-l-lg right-0 h-16 w-8 pl-2 pt-5 flex"  onClick={onClick}  >
     <IoIosArrowForward/>
     </button>
   );
@@ -47,13 +47,13 @@ const [data, setData] = useState([]);
 
 
   var settings = {
-    dots: true,
-    infinite: false,
+    dots: false,
+    infinite: true,
     speed: 500,
     arrows: true,
     slidesToShow: 5,
     slidesToScroll: 5,
-    initialSlide: 0,
+    initialSlide: 2,
     nextArrow: <NextArrow />, // Custom next arrow
     prevArrow: <PrevArrow />, // Custom previous arrow
     responsive: [
@@ -67,7 +67,7 @@ const [data, setData] = useState([]);
         }
       },
       {
-        breakpoint: 600,
+        breakpoint: 700,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
@@ -105,7 +105,7 @@ const [data, setData] = useState([]);
       
         // </div>
 
-        <div className="slider-container mx-5  hidden lg:block  bg-white"> 
+        <div className="slider-container mx-5  bg-white"> 
       <Slider {...settings}>
          {data &&
               data.map((items) => (
